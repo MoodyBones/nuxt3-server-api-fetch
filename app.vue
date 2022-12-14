@@ -3,12 +3,12 @@ const { data: joke, refresh } = useFetch('/api/jokes');
 
 const showDelivery = ref(false);
 
-function handleDelivery() {
+function toggleDelivery() {
   showDelivery.value = !showDelivery.value;
 }
 
-function getNewData() {
-  handleDelivery();
+function getNewJoke() {
+  toggleDelivery();
   refresh();
 }
 </script>
@@ -17,8 +17,8 @@ function getNewData() {
   <div class="container">
     <article>{{ joke.setup }}</article>
     <article v-if="showDelivery">{{ joke.delivery }}</article>
-    <button v-if="!showDelivery" @click="handleDelivery">Tell me</button>
-    <button v-if="showDelivery" @click="getNewData">New Joke</button>
+    <button v-if="!showDelivery" @click="toggleDelivery">Tell me</button>
+    <button v-if="showDelivery" @click="getNewJoke">New Joke</button>
   </div>
 </template>
 
